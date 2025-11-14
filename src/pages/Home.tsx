@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import ParallaxBackground from '../components/ParallaxBackground';
 import { motion } from 'framer-motion';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
       <ParallaxBackground color="#00FF41" variant="grid" />
@@ -63,6 +65,10 @@ const Home: React.FC = () => {
                 boxShadow: '0 0 20px #00FF41'
               }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                localStorage.removeItem('gameCurrentLevel');
+                navigate('/game');
+              }}
             >
               PRESS START
             </motion.button>
@@ -75,6 +81,7 @@ const Home: React.FC = () => {
                 boxShadow: '0 0 20px #00FF41'
               }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/game')}
             >
               CONTINUE
             </motion.button>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Dock, { DockItemData } from './Dock';
-import { Home, User, Briefcase, Mail, Gamepad2 } from 'lucide-react';
+import { Home, User, Briefcase, Mail } from 'lucide-react';
 
 const Layout: React.FC = () => {
   const navigate = useNavigate();
@@ -26,11 +26,6 @@ const Layout: React.FC = () => {
       icon: <Mail size={24} color="#FFE66D" />,
       label: 'Contact',
       onClick: () => navigate('/contact')
-    },
-    {
-      icon: <Gamepad2 size={24} color="#FF1744" />,
-      label: 'Game',
-      onClick: () => navigate('/game')
     }
   ];
 

@@ -19,13 +19,16 @@ import TableauTeam from '../assets/pic/TableauTeam.jpeg';
 import solaire from '../assets/characters/npcs/solaire.gif';
 import luigi from '../assets/characters/npcs/luigi.gif';
 import yoda from '../assets/characters/npcs/yoda.gif';
-import vadar from '../assets/characters/npcs/vadar.gif';
+import gandolf from '../assets/characters/npcs/gandolf.gif';
 import loco from '../assets/characters/npcs/loco.gif';
+import loco2 from '../assets/characters/npcs/loco2.gif';
 import kirby from '../assets/characters/npcs/kirby.gif';
 import tsuny from '../assets/characters/npcs/tsuny.gif';
-import arthas from '../assets/characters/npcs/arthas.gif';
+import pikachu from '../assets/characters/npcs/pikachu.gif';
 import pyro from '../assets/characters/npcs/pyro.gif';
 import peach from '../assets/characters/peach.gif';
+import ninja from '../assets/characters/npcs/ninja.gif';
+import ironman from '../assets/characters/npcs/ironman.gif';
 
 export type Event = {
   type: 'text' | 'image' | 'video';
@@ -142,11 +145,11 @@ export const levels: Level[] = [
     id: 4,
     name: 'STANFORD',
     background: stanfordBg,
-    mission: 'Mastered computer science',
-    year: '2015',
+    mission: 'Masters in Learning, Design, and Technology',
+    year: '2025',
     blocks: [
       {
-        position: 35,
+        position: 32,
         event: {
           type: 'text',
           content:
@@ -164,57 +167,75 @@ export const levels: Level[] = [
     ],
     npcs: [
       {
-        position: 70,
+        position: 90,
         sprite: kirby,
 
         facing: 'left',
         size: 'h-24',
       },
       {
-        position: 75,
+        position: 95,
         sprite: luigi,
         facing: 'left',
         size: 'h-32',
       },
       {
-        position: 80,
+        position: 100,
+        sprite: ninja,
+        facing: 'left',
+        size: 'h-24',
+      },
+      {
+        position: 105,
         sprite: yoda,
         facing: 'right',
         size: 'h-24',
       },
       {
-        position: 85,
+        position: 110,
         sprite: tsuny,
         facing: 'right',
         size: 'h-24',
       },
       {
-        position: 90,
+        position: 115,
         sprite: loco,
-        facing: 'right',
-        size: 'h-20',
+        facing: 'left',
+        size: 'h-16',
       },
       {
-        position: 95,
+        position: 120,
         facing: 'right',
         sprite: solaire,
-        size: 'h-24',
+        size: 'h-28',
       },
       {
-        position: 100,
+        position: 125,
         sprite: pyro,
         facing: 'right',
         size: 'h-32',
       },
       {
-        position: 105,
-        sprite: arthas,
+        position: 130,
+        sprite: loco2,
         facing: 'right',
-        size: 'h-28',
+        size: 'h-16',
       },
       {
-        position: 110,
-        sprite: vadar,
+        position: 135,
+        sprite: gandolf,
+        facing: 'right',
+        size: 'h-24',
+      },
+      {
+        position: 140,
+        sprite: pikachu,
+        facing: 'right',
+        size: 'h-20',
+      },
+      {
+        position: 145,
+        sprite: ironman,
         facing: 'right',
         size: 'h-28',
       },

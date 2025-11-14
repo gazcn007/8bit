@@ -6,7 +6,18 @@ import brick from '../assets/items/brick.png';
 import { levels, getAllEventImages, type Event } from '../data/levels';
 
 const Game: React.FC = () => {
-  const [currentLevel, setCurrentLevel] = useState(0);
+  // Load saved level from localStorage on mount, or start at 0
+  const [currentLevel, setCurrentLevel] = useState(() => {
+    const savedLevel = localStorage.getItem('gameCurrentLevel');
+    if (savedLevel) {
+      const level = parseInt(savedLevel, 10);
+      // Ensure the saved level is valid (within bounds)
+      if (level >= 0 && level < levels.length) {
+        return level;
+      }
+    }
+    return 0;
+  });
   const [characterPosition, setCharacterPosition] = useState(0);
   const [showLevelComplete, setShowLevelComplete] = useState(false);
   const [isJumping, setIsJumping] = useState(false);
@@ -89,6 +100,11 @@ const Game: React.FC = () => {
     };
   }, [isJumping]);
 
+  // Save current level to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('gameCurrentLevel', currentLevel.toString());
+  }, [currentLevel]);
+
   // Reset level complete trigger when level changes
   useEffect(() => {
     levelCompleteTriggered.current = false;
@@ -119,6 +135,11 @@ const Game: React.FC = () => {
     if (totalBlocks > 0 && discoveredBlocks === totalBlocks && !levelCompleteTriggered.current) {
       levelCompleteTriggered.current = true;
       setShowLevelComplete(true);
+      
+      // If this is the last level and game is complete, clear saved progress
+      if (currentLevel === levels.length - 1) {
+        localStorage.removeItem('gameCurrentLevel');
+      }
     }
   }, [hitBlocks, currentLevel]);
 
@@ -155,6 +176,8 @@ const Game: React.FC = () => {
       setShowLevelComplete(false);
       levelCompleteTriggered.current = false;
     } else {
+      // Game completed - clear saved progress
+      localStorage.removeItem('gameCurrentLevel');
       setShowLevelComplete(false);
     }
   };
