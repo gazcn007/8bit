@@ -32,6 +32,7 @@ const Game: React.FC = () => {
   const levelCompleteTriggered = useRef(false);
   const keysPressed = useRef<Set<string>>(new Set());
   const movementIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Helper function to check if a file is a video
   const isVideoFile = (src: string): boolean => {
@@ -157,6 +158,42 @@ const Game: React.FC = () => {
     }
   }, [currentLevel]);
 
+  // Play background music for the current level
+  useEffect(() => {
+    const currentLevelData = levels[currentLevel];
+    if (!currentLevelData || !currentLevelData.audio) return;
+
+    // Stop previous audio if it exists
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+
+    // Create and play new audio
+    const audio = new Audio(currentLevelData.audio);
+    audio.loop = true;
+    audio.volume = 0.5; // Set volume to 50%
+    audioRef.current = audio;
+
+    // Play audio (with error handling for autoplay restrictions)
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Autoplay was prevented, user interaction required
+        console.log('Audio autoplay prevented:', error);
+      });
+    }
+
+    // Cleanup on unmount or level change
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        audioRef.current = null;
+      }
+    };
+  }, [currentLevel]);
+
   // Level complete when all blocks and NPCs with events are discovered
   useEffect(() => {
     const currentLevelData = levels[currentLevel];
@@ -164,13 +201,13 @@ const Game: React.FC = () => {
     
     const totalBlocks = currentLevelData.blocks.length;
     const discoveredBlocks = Array.from(hitBlocks).filter(
-      (blockIndex) => Math.floor(blockIndex / 10) === currentLevel
+      (blockIndex) => Math.floor(blockIndex / 100) === currentLevel
     ).length;
     
     const npcsWithEvents = currentLevelData.npcs?.filter(npc => npc.event) || [];
     const totalNPCs = npcsWithEvents.length;
     const discoveredNPCs = Array.from(hitNPCs).filter(
-      (npcIndex) => Math.floor(npcIndex / 10) === currentLevel
+      (npcIndex) => Math.floor(npcIndex / 100) === currentLevel
     ).length;
     
     const totalRequirements = totalBlocks + totalNPCs;
@@ -195,7 +232,7 @@ const Game: React.FC = () => {
     if (!currentLevelData) return;
 
     currentLevelData.blocks.forEach((block, index) => {
-      const blockIndex = currentLevel * 10 + index; // Unique index across levels
+      const blockIndex = currentLevel * 100 + index; // Unique index across levels
       
       // Calculate viewport positions for collision detection
       // Character viewport position: characterPosition%
@@ -223,7 +260,7 @@ const Game: React.FC = () => {
       // Only check NPCs that have events
       if (!npc.event) return;
       
-      const npcIndex = currentLevel * 10 + index; // Unique index across levels
+      const npcIndex = currentLevel * 100 + index; // Unique index across levels
       
       // Calculate viewport positions for collision detection
       const characterViewportPos = characterPosition;
@@ -391,12 +428,12 @@ const Game: React.FC = () => {
             {(() => {
               const totalBlocks = level.blocks.length;
               const discoveredBlocks = Array.from(hitBlocks).filter(
-                (blockIndex) => Math.floor(blockIndex / 10) === currentLevel
+                (blockIndex) => Math.floor(blockIndex / 100) === currentLevel
               ).length;
               const npcsWithEvents = level.npcs?.filter(npc => npc.event) || [];
               const totalNPCs = npcsWithEvents.length;
               const discoveredNPCs = Array.from(hitNPCs).filter(
-                (npcIndex) => Math.floor(npcIndex / 10) === currentLevel
+                (npcIndex) => Math.floor(npcIndex / 100) === currentLevel
               ).length;
               const totalRequirements = totalBlocks + totalNPCs;
               const discoveredRequirements = discoveredBlocks + discoveredNPCs;
@@ -436,7 +473,7 @@ const Game: React.FC = () => {
 
       {/* Render blocks */}
       {level.blocks.map((block, index) => {
-        const blockIndex = currentLevel * 10 + index;
+        const blockIndex = currentLevel * 100 + index;
         const isHit = hitBlocks.has(blockIndex);
         
         // Calculate block position - blocks are fixed in world coordinates and move with background
@@ -761,12 +798,12 @@ const Game: React.FC = () => {
         if (!currentLevelData) return false;
         const totalBlocks = currentLevelData.blocks.length;
         const discoveredBlocks = Array.from(hitBlocks).filter(
-          (blockIndex) => Math.floor(blockIndex / 10) === currentLevel
+          (blockIndex) => Math.floor(blockIndex / 100) === currentLevel
         ).length;
         const npcsWithEvents = currentLevelData.npcs?.filter(npc => npc.event) || [];
         const totalNPCs = npcsWithEvents.length;
         const discoveredNPCs = Array.from(hitNPCs).filter(
-          (npcIndex) => Math.floor(npcIndex / 10) === currentLevel
+          (npcIndex) => Math.floor(npcIndex / 100) === currentLevel
         ).length;
         const totalRequirements = totalBlocks + totalNPCs;
         const discoveredRequirements = discoveredBlocks + discoveredNPCs;

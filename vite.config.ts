@@ -7,4 +7,5 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  assetsInclude: ['**/*.MP4', '**/*.mp4', '**/*.MOV', '**/*.mov', '**/*.webm', '**/*.avi', '**/*.mkv'],
 });

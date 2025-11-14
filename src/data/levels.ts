@@ -44,6 +44,12 @@ import StanfordCenter from '../assets/pic/StanfordCenter.jpg';
 import StanfordCenter2 from '../assets/pic/StanfordCenter2.jpg';
 import StanfordCenter3 from '../assets/pic/StanfordCenter3.jpg';
 
+// Audio files
+import audio1 from '../assets/audio/01underwater.mp3';
+import audio2 from '../assets/audio/02underground.mp3';
+import audio3 from '../assets/audio/03saveprincess.mp3';
+import audio4 from '../assets/audio/04theme.mp3';
+
 // npcs
 import solaire from '../assets/characters/npcs/solaire.gif';
 import luigi from '../assets/characters/npcs/luigi.gif';
@@ -88,6 +94,7 @@ export type Level = {
   year: string;
   blocks: Block[];
   npcs?: NPC[];
+  audio?: string; // Background music for the level
 };
 
 // Collect all images for preloading
@@ -117,6 +124,7 @@ export const levels: Level[] = [
     background: beijingBg,
     mission: 'I was born in Beijing, China',
     year: '1994',
+    audio: audio1,
     blocks: [
       {
         position: 60,
@@ -152,6 +160,7 @@ export const levels: Level[] = [
     background: montrealBg,
     mission: 'I moved to Canada with my family in 2008',
     year: '2008',
+    audio: audio2,
     blocks: [
       {
         position: 60,
@@ -202,6 +211,7 @@ export const levels: Level[] = [
     background: vancouverBg,
     mission: 'Career Journey',
     year: '2017',
+    audio: audio3,
     blocks: [
       {
         position: 115,
@@ -242,6 +252,7 @@ export const levels: Level[] = [
     background: stanfordBg,
     mission: 'Masters in Learning, Design, and Technology',
     year: '2025',
+    audio: audio4,
     blocks: [
       {
         position: 32,
