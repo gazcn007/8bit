@@ -179,26 +179,14 @@ Keep responses concise and in an 80s arcade terminal style (use ALL CAPS, be fri
     <div className="relative w-full min-h-screen bg-black">
       <ParallaxBackground color="#FFE66D" variant="lines" />
 
-      <div className="relative z-10 container mx-auto px-4 py-8 md:py-20">
-        <h1
-          className="text-3xl md:text-5xl lg:text-7xl font-bold mb-8 md:mb-12 text-center"
-          style={{
-            fontFamily: '"Press Start 2P", cursive',
-            color: '#FFE66D',
-            textShadow: '0 0 10px #FFE66D'
-          }}
-        >
-          TERMINAL CHAT
-        </h1>
-
-        <div className="max-w-4xl mx-auto">
+      <div className="relative z-10 container mx-auto px-4 py-4 md:py-6 flex items-center" style={{ height: 'calc(100vh - 100px)' }}>
+        <div className="max-w-4xl mx-auto w-full h-full flex flex-col">
           <div
-            className="border-4 border-[#FFE66D] bg-black/90 p-4 md:p-8 flex flex-col"
+            className="border-4 border-[#FFE66D] bg-black/90 p-4 md:p-8 flex flex-col flex-1"
             style={{
               fontFamily: '"Press Start 2P", cursive',
               color: '#FFE66D',
-              minHeight: '500px',
-              maxHeight: '70vh'
+              minHeight: 0
             }}
           >
             {/* Chat Messages Area */}

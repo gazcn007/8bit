@@ -31,8 +31,12 @@ const Home: React.FC = () => {
             className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-bold mb-4 md:mb-6 tracking-wider"
             style={{
               fontFamily: '"Press Start 2P", cursive',
-              textShadow: '0 0 10px #00FF41, 0 0 20px #00FF41, 0 0 30px #00FF41',
-              color: '#00FF41'
+              textShadow: isMobile 
+                ? '0 0 5px #00FF41' 
+                : '0 0 10px #00FF41, 0 0 20px #00FF41, 0 0 30px #00FF41',
+              color: '#00FF41',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale'
             }}
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
