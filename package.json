@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.app.json"
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
+    "deploy": "git add . && git commit -m \"Deploying updates\" && git push origin main"
   },
   "dependencies": {
     "@google/genai": "^1.29.1",
