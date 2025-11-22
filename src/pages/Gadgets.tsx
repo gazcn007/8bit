@@ -6,7 +6,7 @@ import Calculator from '../assets/gadgets/Calculator.png';
 import Camera from '../assets/gadgets/Camera.png';
 import Keyboard from '../assets/gadgets/Keyboard.png';
 import Soda from '../assets/gadgets/Soda.png';
-import OpenSource from '../assets/gadgets/OpenSource.png';
+import OpenSource from '../assets/gadgets/Opensource.png';
 import Computer from '../assets/gadgets/Computer.png';
 import Luggage from '../assets/gadgets/Luggage.png';
 import EdTech from '../assets/gadgets/EdTech.png';
